@@ -1,9 +1,9 @@
 {
-  "name": "trailpack-letsencrypt",
-  "version": "1.0.0",
+  "name": "trailpack-greenlock",
+  "version": "0.1.0",
   "description": "Letsencrypt Trailpack for Trails",
   "main": "index.js",
-  "repository": "https://github.com/jaumard/trailpack-letsencrypt.git",
+  "repository": "https://github.com/jaumard/trailpack-greenlock.git",
   "author": "jaumard <jimmy.aumard@gmail.com>",
   "license": "MIT",
   "dependencies": {

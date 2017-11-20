@@ -20,9 +20,9 @@ module.exports = class Letsencrypt extends Trailpack {
       return Promise.reject(
         new Error('trailpack-express must be installed!'))
     }
-    if (!this.app.config.letsencrypt) {
+    if (!this.app.config.greenlock) {
       return Promise.reject(
-        new Error('config.letsencrypt is absent, please create the config file'))
+        new Error('config.greenlock is absent, please create the config file'))
     }
     return Promise.resolve()
   }
@@ -35,7 +35,7 @@ module.exports = class Letsencrypt extends Trailpack {
 
     if (this.app.config.env === 'production') {
       this.app.config.web.externalConfig = (trailsApp, expressApp) => {
-        const le = greenlock.create(_.cloneDeep(this.app.config.letsencrypt))
+        const le = greenlock.create(_.cloneDeep(this.app.config.greenlock))
         return new Promise((resolve, reject) => {
           const nativeServer = https.createServer(le.httpsOptions, le.middleware(expressApp))
             .listen(port, host, err => {
