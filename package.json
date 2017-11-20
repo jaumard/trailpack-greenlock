@@ -1,0 +1,14 @@
+{
+  "name": "trailpack-letsencrypt",
+  "version": "1.0.0",
+  "description": "Letsencrypt Trailpack for Trails",
+  "main": "index.js",
+  "repository": "https://github.com/jaumard/trailpack-letsencrypt.git",
+  "author": "jaumard <jimmy.aumard@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "greenlock": "^2.1.17",
+    "lodash": "^4.17.4",
+    "trailpack": "^2.1.3"
+  }
+}
