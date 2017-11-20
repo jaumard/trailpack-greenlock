@@ -44,3 +44,10 @@ module.exports = {
 ```
 
 Letsencrypt will be used only on production environment, so be sure to set NODE_ENV=production on your server 
+
+## Contributing
+We love contributions! Please check out our [Contributor's Guide](https://github.com/trailsjs/trails/blob/master/.github/CONTRIBUTING.md) for more
+information on how our projects are organized and how to get started.
+
+## License
+[MIT](https://github.com/jaumard/trailpack-greenlock/blob/master/LICENSE)
