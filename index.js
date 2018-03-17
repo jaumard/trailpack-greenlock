@@ -10,12 +10,12 @@ const https = require('https')
  * @class Letsencrypt
  * @see {@link http://trailsjs.io/doc/trailpack}
  */
-module.exports = class Letsencrypt extends Trailpack {
+module.exports = class GreenLockTrailpack extends Trailpack {
   /**
    * Ensure that config/letsencrypt is valid
    * and express trailpacks is installed
    */
-  validate() {
+  async validate() {
     if (_.includes(_.keys(this.app.config.main.packs), 'express')) {
       return Promise.reject(
         new Error('trailpack-express must be installed!'))
@@ -30,29 +30,28 @@ module.exports = class Letsencrypt extends Trailpack {
   configure() {
     const port = this.app.config.web.port
     const host = this.app.config.web.host
-    const portHttp = this.app.config.web.portHttp
-    const redirectToHttps = this.app.config.web.redirectToHttps || false
+    const portHttp = this.app.config.web.portHttp || 80
+    const redirectToHttps = this.app.config.web.redirectToHttps || true
+    const config = this.app.config.greenlock
 
-    if (this.app.config.env === 'production') {
+    if (config.enabled) {
+      this.app.log.debug('Letsencrypt setup')
       this.app.config.web.externalConfig = (trailsApp, expressApp) => {
-        const le = greenlock.create(_.cloneDeep(this.app.config.greenlock))
+        const le = greenlock.create(_.cloneDeep(config))
         return new Promise((resolve, reject) => {
           const nativeServer = https.createServer(le.httpsOptions, le.middleware(expressApp))
             .listen(port, host, err => {
               if (err) return reject(err)
-              if (redirectToHttps || portHttp) {
-                const httpServer = http.createServer(app)
-                  .listen(portHttp, host, err => {
-                    if (err) return reject(err)
-                    resolve([nativeServer, httpServer])
-                  })
-              }
-              else {
-                resolve(nativeServer)
-              }
+              const httpServer = http.createServer(redirectToHttps ? le.middleware(require('redirect-https')()) : le.middleware(expressApp))
+                .listen(portHttp, host, err => {
+                  if (err) return reject(err)
+                  resolve([nativeServer, httpServer])
+                })
             })
         })
       }
+    } else {
+      this.app.log.warn('Letsencrypt not enable because config.greenlock.enabled = false')
     }
   }
 
