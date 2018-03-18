@@ -15,7 +15,7 @@ module.exports = class GreenLockTrailpack extends Trailpack {
    * Ensure that config/letsencrypt is valid
    * and express trailpacks is installed
    */
-  async validate() {
+  validate() {
     if (_.includes(_.keys(this.app.config.main.packs), 'express')) {
       return Promise.reject(
         new Error('trailpack-express must be installed!'))
