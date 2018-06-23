@@ -10,14 +10,18 @@ Here is a very simple example:
 
 ```js
 module.exports = {
-  server: 'staging', // Set to https://acme-v01.api.letsencrypt.org/directory in production
+  version: 'draft-11',
+  server: 'https://acme-v02.api.letsencrypt.org/directory',
   email: 'john.doe@example.com',
   agreeTos: true,
-  approvedDomains: ['example.com', 'www.example.com']
+  approvedDomains: ['example.com', 'www.example.com'],
+  configDir: '/path/to/project/etc',
+  // whether or not to contribute telemetry data to the greenlock project
+  telemetry: true
 }
 ```
 
-More information about the configuration possibilities here: https://git.daplie.com/Daplie/node-greenlock
+More information about the configuration possibilities here: https://git.coolaj86.com/coolaj86/greenlock.js
 
 ## Usage
 Add the trailpack under config/main.js
