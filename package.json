@@ -1,15 +1,15 @@
 {
   "name": "trailpack-greenlock",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Letsencrypt Trailpack for Trails",
   "main": "index.js",
   "repository": "https://github.com/jaumard/trailpack-greenlock.git",
   "author": "jaumard <jimmy.aumard@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "greenlock": "^2.1.18",
-    "lodash": "^4.17.5",
-    "redirect-https": "^1.1.5",
+    "greenlock": "^2.8.7",
+    "lodash": "^4.17.15",
+    "redirect-https": "^1.3.0",
     "trailpack": "^2.1.3"
   }
 }
